@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>www.zhinengshe.com</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .clock{
+            width: 300px;
+            height: 300px;
+            border:5px solid mediumspringgreen;
+            border-radius: 50%;
+            position: absolute;
+            left:50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top:-150px;
+        }
+        .hou{
+            width: 10px;
+            height: 80px;
+            background: #000;
+            position: absolute;
+            left:50%;
+            top:70px;
+            margin-left:-5px;
+            border-radius: 50% 50% 0 0;
+            -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+        }
+        .min{
+            width: 8px;
+            height: 100px;
+            background: steelblue;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            left: 50%;
+            top: 50px;
+            margin-left: -3px;
+            -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+        }
+        .sec{
+            width: 4px;
+            height: 120px;
+            background: salmon;
+            position: absolute;
+            left: 50%;
+            top: 30px;
+            margin-left: -2px;
+            border-radius: 50% 50% 0 0;
+            -webkit-transform-origin: bottom;
+            transform-origin: bottom;
+        }
+        .cap{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: -webkit-radial-gradient(#fff,#000);
+            background: radial-gradient(#fff,#000);
+            position: absolute;
+            top: 150px;
+            left: 150px;
+            margin-top: -10px;
+            margin-left: -10px;
+        }
+        .scale{
+            width: 4px;
+            height: 10px;
+            background: skyblue;
+            position: absolute;
+            left: 50%;
+            top: 0;center 150px
+            margin-left:-2px;
+            -webkit-transform-origin: center 150px;
+            transform-origin: center 150px;
+        }
+        .bigscale{
+            width: 4px;
+            height: 20px;
+            background: saddlebrown;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -2px;
+            -webkit-transform-origin: center 150px;
+            transform-origin: center 150px;
+        }
+        .bigscale i{
+            position: absolute;
+            width: 20px;
+            left: 50%;
+            top: 20px;
+            margin-left: -10px;
+            font-family: 微软雅黑;
+            font-style: normal;
+            text-align: center;
+        }
+    </style>
+    <script>
+        window.onload= function () {
+            var oClock=document.querySelector('.clock');
+            var oH=document.querySelector('.hou');
+            var oM=document.querySelector('.min');
+            var oS=document.querySelector('.sec');
+            var N=60;
+            for(var i=0;i<N;i++){
+                var oSpan=document.createElement('span');
+                oSpan.className='scale';
+                oSpan.style.webkitTransform='rotate('+i*6+'deg)';
+                oSpan.style.transform='rotate('+i*6+'deg)';
+                if(i%5==0){
+                    oSpan.className='bigscale';
+                    oSpan.innerHTML='<i>'+(i/5||12)+'</i>';
+                    var oI=oSpan.children[0];
+                    oI.style.webkitTransform='rotate('+-i*6+'deg)';
+                    oI.style.transform='rotate('+-i*6+'deg)';
+                }
+                oClock.appendChild(oSpan);
+            }
+            clock();
+            setInterval(clock,1000);
+            function clock(){
+                var oDate=new Date();
+                var h=oDate.getHours();
+                var m=oDate.getMinutes();
+                var s=oDate.getSeconds();
+                oH.style.webkitTransform='rotate('+(h*30+m/60*30)+'deg)';
+                oH.style.transform='rotate('+(h*30+m/60*30)+'deg)';
+                oM.style.webkitTransform='rotate('+(m*6+s/60*6)+'deg)';
+                oM.style.transform='rotate('+(m*6+s/60*6)+'deg)';
+                oS.style.webkitTransform='rotate('+s*6+'deg)';
+                oS.style.transform='rotate('+s*6+'deg)';
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="clock">
+    <div class="hou"></div>
+    <div class="min"></div>
+    <div class="sec"></div>
+    <div class="cap"></div>
+</div>
+
+</body>
+</html>
